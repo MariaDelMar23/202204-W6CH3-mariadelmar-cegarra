@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 
 const Display = () => {
-  const phoneNumber = useSelector((state) => state.telephone.number);
+  const { number: phoneNumber } = useSelector((state) => state.telephone);
+
   return <span className="number">{phoneNumber}</span>;
 };
 
