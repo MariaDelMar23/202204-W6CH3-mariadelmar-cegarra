@@ -1,5 +1,6 @@
 import { createContext } from "react";
+import telephoneReducer from "../redux/features/telephoneSlice";
 
-const PhoneContext = createContext();
+const PhoneContext = createContext(telephoneReducer);
 
 export default PhoneContext;
