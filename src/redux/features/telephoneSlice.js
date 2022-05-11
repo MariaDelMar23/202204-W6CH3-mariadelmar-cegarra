@@ -4,7 +4,7 @@ const telephoneSlice = createSlice({
   name: "telephone",
   initialState: {
     calling: false,
-    number: 0,
+    number: [],
   },
   reducers: {
     setCallingTrue: (telephone) => ({
@@ -15,6 +15,18 @@ const telephoneSlice = createSlice({
       ...telephone,
       calling: false,
     }),
+    addDigit: (telephone, action) => ({
+      ...telephone,
+      number: telephone.number + action.payload,
+    }),
+    removeLastDigit: (telephone) => ({
+      ...telephone,
+      number: telephone.number.slice(0, telephone.number.length - 1),
+    }),
+    resetNumber: (telephone) => ({
+      ...telephone,
+      number: [],
+    }),
   },
 });
 
@@ -23,4 +35,7 @@ export default telephoneSlice.reducer;
 export const {
   setCallingTrue: setCallingTrueActionCreator,
   setCallingFalse: setCallingFalseActionCreator,
+  addDigit: addDigitActionCreator,
+  removeLastDigit: removeLastDigitActionCreator,
+  resetNumber: resetNumberActionCreator,
 } = telephoneSlice.actions;

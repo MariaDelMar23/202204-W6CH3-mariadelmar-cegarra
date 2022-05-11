@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import PhoneContext from "../../contexts/PhoneContext";
+import { useSelector } from "react-redux";
 
 const Info = () => {
-  const { calling } = useContext(PhoneContext);
+  const { calling } = useSelector((state) => state.telephone);
 
   return (
     <>

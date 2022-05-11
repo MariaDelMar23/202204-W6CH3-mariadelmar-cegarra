@@ -1,17 +1,37 @@
-import { useContext } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PhoneContext from "../../contexts/PhoneContext";
+import {
+  resetNumberActionCreator,
+  setCallingFalseActionCreator,
+  setCallingTrueActionCreator,
+} from "../../redux/features/telephoneSlice";
 import Action from "../Action/Action";
 import Display from "../Display/Display";
 
 const Actions = () => {
-  const { call, hang } = useContext(PhoneContext);
+  const timer = useRef(null);
+
   const dispatch = useDispatch();
   const { calling, number: phoneNumber } = useSelector(
     (state) => state.telephone
   );
 
-  const call = (event) => {};
+  const call = (event) => {
+    if (phoneNumber.length < 9) {
+      return;
+    }
+    dispatch(setCallingTrueActionCreator());
+    timer.current = setTimeout(() => {
+      hang();
+    }, 5000);
+  };
+
+  const hang = (event) => {
+    dispatch(resetNumberActionCreator());
+    dispatch(setCallingFalseActionCreator());
+    dispatch(setCallingFalseActionCreator());
+  };
+
   return (
     <>
       <Display />
